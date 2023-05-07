@@ -9,11 +9,13 @@ var builder = WebApplication.CreateBuilder(args);
 const string CONNECTION_NAME = "UniversityDB";
 var connectionString = builder.Configuration.GetConnectionString(CONNECTION_NAME);
 
-//3. Add Context
+//3. Add Context to Services of builder
 builder.Services.AddDbContext<UniversityDBContext>(options => options.UseSqlServer(connectionString));
 
-// Add services to the container.
+//7. Add Service of JWT Autorization
+//builder.Services.AddJwtTokenServices(builder.Configuration);
 
+// Add services to the container.
 builder.Services.AddControllers();
 
 //4. Add Custom Services (folder Services)
