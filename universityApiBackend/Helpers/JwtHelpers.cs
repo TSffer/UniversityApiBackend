@@ -18,11 +18,11 @@ namespace universityApiBackend.Helpers
                 new Claim(ClaimTypes.Expiration, DateTime.UtcNow.AddDays(1).ToString("MMM ddd dd yyyy HH:mm:ss tt"))
             };
 
-            if(userAccounts.UserName== "Admin")
+            if (userAccounts.UserName == "Admin")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "Administrator"));
             }
-            else if(userAccounts.UserName == "User 1")
+            else if (userAccounts.UserName == "User 1")
             {
                 claims.Add(new Claim(ClaimTypes.Role, "User"));
                 claims.Add(new Claim("UserOnly", "User 1"));
@@ -42,9 +42,9 @@ namespace universityApiBackend.Helpers
             try
             {
                 var userToken = new UserTokens();
-                if(model == null)
+                if (model == null)
                 {
-                    throw new ArgumentNullException(nameof(model)); 
+                    throw new ArgumentNullException(nameof(model));
                 }
                 //Obtein SECRET KEY
                 var key = System.Text.Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
@@ -76,7 +76,7 @@ namespace universityApiBackend.Helpers
                 userToken.GuidId = Id;
 
                 return userToken;
-            }   
+            }
             catch (Exception ex)
             {
                 throw new Exception("Error Generating the JWT", ex);
