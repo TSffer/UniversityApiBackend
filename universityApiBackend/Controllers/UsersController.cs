@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using universityApiBackend.DataAccess;
 using universityApiBackend.Models.DataModels;
 
@@ -18,17 +19,25 @@ namespace universityApiBackend.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UniversityDBContext _context;
+        private readonly ILogger<UsersController> _logger;
 
-        public UsersController(UniversityDBContext context)
+        public UsersController(UniversityDBContext context, ILogger<UsersController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Users
         [HttpGet]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
+        // [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult<IEnumerable<User>>> GetUsers()
         {
+            _logger.LogTrace($"{nameof(UsersController)} - {nameof(GetUser)} - Trace Level Log");
+            _logger.LogDebug($"{nameof(UsersController)} - {nameof(GetUser)} - Debug Level Log");
+            _logger.LogInformation($"{nameof(UsersController)} - {nameof(GetUser)} - Information Level log");
+            _logger.LogWarning($"{nameof(UsersController)} - {nameof(GetUser)} - Warning Level Log");
+            _logger.LogError($"{nameof(UsersController)} - {nameof(GetUser)} - Error Level Log");
+            _logger.LogCritical($"{nameof(UsersController)} - {nameof(GetUser)} -Critical Level Log");
             if (_context.Users == null)
             {
                 return NotFound();
@@ -38,9 +47,16 @@ namespace universityApiBackend.Controllers
 
         // GET: api/Users/5
         [HttpGet("{id}")]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Administrator, User")]
         public async Task<ActionResult<User>> GetUser(int id)
         {
+            _logger.LogTrace($"{nameof(UsersController)} - {nameof(GetUser)} - Trace Level Log");
+            _logger.LogDebug($"{nameof(UsersController)} - {nameof(GetUser)} - Debug Level Log");
+            _logger.LogInformation($"{nameof(UsersController)} - {nameof(GetUser)} - Information Level log");
+            _logger.LogWarning($"{nameof(UsersController)} - {nameof(GetUser)} - Warning Level Log");
+            _logger.LogError($"{nameof(UsersController)} - {nameof(GetUser)} - Error Level Log");
+            _logger.LogCritical($"{nameof(UsersController)} - {nameof(GetUser)} -Critical Level Log");
+
             if (_context.Users == null)
             {
                 return NotFound();
